@@ -11,5 +11,10 @@ step{
 echo "Testing is running..."
 }
 }
+stage('Deploy'){
+step{
+echo "Deployment is running..."
+}
+}
 }
 }
