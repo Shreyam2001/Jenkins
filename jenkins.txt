@@ -16,5 +16,10 @@ steps{
 echo "Deployment is running..."
 }
 }
+stage('Release'){
+steps{
+echo "relaesing ..."
+}
+}
 }
 }
