@@ -1,25 +1,26 @@
-pipeline{
-agent any
-stages{
-stage('Build'){
-steps{
-echo "Build is running...."
-}
-}
-stage('Test'){
-steps{
-echo "Testing is running..."
-}
-}
-stage('Deploy'){
-steps{
-echo "Deployment is running..."
-}
-}
-stage('Release'){
-steps{
-echo "relaesing ..."
-}
-}
-}
+pipeline {
+	agent any
+		stages {
+			stage('Clone repository') {
+				steps {
+				checkout([$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[url: 'https://github.com/Shreyam2001/Jenkins.git']]])
+				}
+			}
+			stage('Build Docker image') {
+				steps {
+				script {
+   					 def dockerImage = docker.build('Shreyam:1.0', '.')
+				}
+				}
+			}
+			stage('Push to Docker Hub') {
+			steps {
+			withCredentials([usernamePassword(credentialsId: 'Docker_Login', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+			sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
+			}
+			sh 'docker tag shreyam:1.0 shreyam2001/fibonacci-2:1.0'
+			sh 'docker push shreyam2001/fibonacci-2:1.0'
+			}
+			}
+		}
 }
