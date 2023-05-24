@@ -17,16 +17,16 @@ pipeline {
 				}
 			}
 		   }
-		   stage('Build and Push Docker Image') {
+		   stage('Push To Harbor') {
             		steps {
-                	script {
-                		def dockerImage = docker.build("sre-training/shreyam-fibonacci:2.0", ".")
+                		script {
+                			def dockerImage = docker.build("sre-training/shreyam-fibonacci:2.0", ".")
 
-                        docker.withRegistry('https://harbor.cubastion.net', 'harbor_sre') {
-                            dockerImage.push()
-                        }
+                       		docker.withRegistry('https://harbor.cubastion.net', 'harbor_sre') {
+                           		 dockerImage.push()
+                       		}
 
-                	}
+                		}
             		}
         	   }
 		   stage('Cleanup') { steps { cleanWs() } }
