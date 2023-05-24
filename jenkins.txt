@@ -21,9 +21,7 @@ pipeline {
 			steps{
 				script{
 					def dockerImage = docker.build("sre-training/shreyam-fibonacci:2.0", ".")
-					docker.withRegistry('https://harbor.cubastion.net', 'harbor_sre') {
-                            			dockerImage.push()
-                        		}
+					docker.withRegistry('https://harbor.cubastion.net', 'harbor_sre') { dockerImage.push() }
 				}
 			}
 		   }
