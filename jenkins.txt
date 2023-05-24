@@ -4,7 +4,7 @@ pipeline {
 		   stage('Build Docker image') {
 			steps {
 			script {
-   				def dockerImage = docker.build('shreyam2001/fibonacci-2/fibonacci:3.0', '.')
+   				def dockerImage = docker.build('fibonacci:3.0', '.')
 			}
 			}
 		   }
@@ -12,7 +12,7 @@ pipeline {
 			steps {
 				script{
 				docker.withRegistry('https://index.docker.io/v1/', 'Docker_Login') {
-                        		docker.image('shreyam2001/fibonacci-2/fibonacci:3.0').push()
+                        		docker.image('fibonacci:3.0').push('shreyam2001/fibonacci-2:3.0')
                     		}
 				}
 			}
