@@ -10,9 +10,11 @@ pipeline {
 		   }
 		   stage('Push to Docker Hub') {
 			steps {
+				script{
 				docker.withRegistry('shreyam2001/fibonacci-2', 'Docker_Login') {
                         		docker.push('fibonnaci:2.1')
                     		}
+				}
 			}
 		   }
 	     }
