@@ -13,7 +13,7 @@ pipeline {
 			withCredentials([usernamePassword(credentialsId: 'Docker_Login', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
 			sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
 			}
-			sh 'docker tag fibonacci:2.0 shreyam2001/fibonacci-2:2.0'
+			sh 'docker tag fibonnaci:2.0 shreyam2001/fibonacci-2:2.0'
 			sh 'docker push shreyam2001/fibonacci-2:2.0'
 			}
 			}
