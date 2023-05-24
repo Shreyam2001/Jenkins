@@ -14,7 +14,7 @@ pipeline {
 				docker.withRegistry('https://index.docker.io/v1/', 'Docker_Login') {
                     		}
 				}
-				sh 'docker push shreyam2001/fibonacci-2'
+				sh 'docker push shreyam2001/fibonacci-2:3.0'
 			}
 		   }
 	     }
