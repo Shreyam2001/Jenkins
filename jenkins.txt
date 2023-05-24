@@ -11,7 +11,7 @@ pipeline {
 		   stage('Push to Docker Hub') {
 			steps {
 				script{
-				docker.withRegistry('https://hub.docker.com', 'Docker_Login') {
+				docker.withRegistry('https://hub.docker.com/repository/docker/shreyam2001/fibonacci-2/general', 'Docker_Login') {
                         		def dockerImage = docker.image('fibonacci:3.0')
 					dockerImage.push('shreyam2001/fibonacci-2:3.0')
                     		}
