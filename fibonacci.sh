@@ -1,5 +1,5 @@
 echo "First 20 Fibinnaci numbers are: -"
-n=20
+n=15
 a=0
 b=1
 c=2
