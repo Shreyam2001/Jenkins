@@ -1,21 +1,19 @@
 pipeline {
 	agent any
-		stages {
-			stage('Build Docker image') {
-				steps {
-				script {
-   					 def dockerImage = docker.build('fibonnaci:2.0', '.')
-				}
-				}
-			}
-			stage('Push to Docker Hub') {
+	    stages {
+		   stage('Build Docker image') {
 			steps {
-			withCredentials([usernamePassword(credentialsId: 'Docker_Login', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-			sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
-			}
-			sh 'docker tag fibonnaci:2.0 shreyam2001/fibonacci-2:2.0'
-			sh 'docker push shreyam2001/fibonacci-2:2.0'
+			script {
+   				def dockerImage = docker.build('fibonnaci:2.1', '.')
 			}
 			}
-		}
+		   }
+		   stage('Push to Docker Hub') {
+			steps {
+				docker.withRegistry('shreyam2001/fibonacci-2', 'Docker_Login') {
+                        		docker.push('fibonnaci:2.1')
+                    		}
+			}
+		   }
+	     }
 }
