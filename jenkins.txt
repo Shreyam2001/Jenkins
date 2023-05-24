@@ -12,7 +12,7 @@ pipeline {
 			steps {
 				script{
 				docker.withRegistry('https://index.docker.io/v1/', 'Docker_Login') {
-                        		def dockerImage = docker.image('fibonacci:3.0')
+                        		def dockerImage = ''
 					dockerImage.push('shreyam2001/fibonacci-2:3.0')
                     		}
 				}
