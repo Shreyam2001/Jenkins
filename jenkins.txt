@@ -4,7 +4,7 @@ pipeline {
 		   stage('Build Docker image') {
 			steps {
 			script {
-   				docker.build('shreyam2001/fibonacci-2:3.0', '.')
+   				docker.build("${params.dockerhub_image_name}:${params.tag_num}", '.')
 			}
 			}
 		   }
@@ -12,7 +12,7 @@ pipeline {
 			steps {
 				script{
 				docker.withRegistry('https://registry.hub.docker.com', 'Docker_Login') {
-                    			docker.image('shreyam2001/fibonacci-2:3.0').push()
+                    			docker.image("${params.dockerhub_image_name}:${params.tag_num}").push()
 				}
 				}
 			}
@@ -20,7 +20,7 @@ pipeline {
 		   stage('Push to Harbor'){
 			steps{
 				script{
-					def dockerImage = docker.build("sre-training/shreyam-fibonacci:2.0", ".")
+					def dockerImage = docker.build("${params.harbor_image_name}:${params.tag_num}", ".")
 					docker.withRegistry('https://harbor.cubastion.net', 'harbor_sre') { dockerImage.push() }
 				}
 			}
